@@ -39,10 +39,10 @@ public class RoundCornerProgress extends View {
     private int   colorProgress;
     private int   colorSecondaryProgress;
 
-    private RectF    mRect  = new RectF();
-    private Path     mPath  = new Path();
-    private Paint    mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Xfermode mMode  = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
+    private RectF mRect;
+    private Path  mPath;
+    private Paint mPaint;
+    private Xfermode mMode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
 
     private int mWidth;
     private int mHeight;
@@ -74,6 +74,10 @@ public class RoundCornerProgress extends View {
         int colorSecondaryProgressDefault = context.getResources().getColor(R.color.round_corner_progress_bar_secondary_progress_default);
         colorSecondaryProgress = typedArray.getColor(R.styleable.RoundCornerProgress_rcSecondaryProgressColor, colorSecondaryProgressDefault);
         typedArray.recycle();
+
+        mRect = new RectF();
+        mPath = new Path();
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
     @Override
@@ -111,8 +115,6 @@ public class RoundCornerProgress extends View {
         Log.d(TAG, "onDraw");
         Log.d(TAG, "progress: " + progress);
         //绘制背景
-        mPaint.reset();
-        mPaint.setAntiAlias(true);
         mPaint.setColor(colorBackground);
         mRect.set(0, 0, mWidth, mHeight);
         /* mPath.reset();
@@ -122,44 +124,23 @@ public class RoundCornerProgress extends View {
         canvas.drawRoundRect(mRect, radius, radius, mPaint);
 
         // 绘制progress层
-        int sc = canvas.saveLayer(0 + padding, 0 + padding, progress / max * mWidth - padding, mHeight - padding,
-                null, Canvas.ALL_SAVE_FLAG);
-        mPaint.setAntiAlias(true);
+        int sc = canvas.saveLayer(padding, padding, progress / max * mWidth - padding, mHeight - padding,
+                mPaint, Canvas.ALL_SAVE_FLAG);
         mPaint.setColor(colorProgress);
-        mRect.set(0 + padding, 0 + padding, mWidth - padding, mHeight - padding);
+        mRect.set(padding, padding, mWidth - padding, mHeight - padding);
         canvas.drawRoundRect(mRect, radius, radius, mPaint);
 
         // 设置遮挡属性
         mPaint.setColor(0xffff0000);
         mPaint.setXfermode(mMode);
         // 绘制遮挡
-        mRect.set(0 + padding, 0 + padding, progress / max * mWidth - padding, mHeight - padding);
+        mRect.set(padding, padding, progress / max * mWidth - padding, mHeight - padding);
         float radii[] = new float[]{radius, radius, radius, radius, radius, radius, radius, radius};
         mPath.reset();
         mPath.addRoundRect(mRect, radii, Path.Direction.CW);
         canvas.drawPath(mPath, mPaint);
         mPaint.setXfermode(null);
         canvas.restoreToCount(sc);
-
-        // 绘制secondProgress层
-        int sc2 = canvas.saveLayer(0 + padding, 0 + padding, secondaryProgress / max * mWidth - padding, mHeight - padding,
-                null, Canvas.ALL_SAVE_FLAG);
-        mPaint.setAntiAlias(true);
-        mPaint.setColor(colorSecondaryProgress);
-        mRect.set(0 + padding, 0 + padding, mWidth - padding, mHeight - padding);
-        canvas.drawRoundRect(mRect, radius, radius, mPaint);
-
-        // 设置遮挡属性
-        mPaint.setColor(0xffff0000);
-        mPaint.setXfermode(mMode);
-        // 绘制遮挡
-        mRect.set(0 + padding, 0 + padding, secondaryProgress / max * mWidth - padding, mHeight - padding);
-        float radii2[] = new float[]{radius, radius, radius, radius, radius, radius, radius, radius};
-        mPath.reset();
-        mPath.addRoundRect(mRect, radii2, Path.Direction.CW);
-        canvas.drawPath(mPath, mPaint);
-        mPaint.setXfermode(null);
-        canvas.restoreToCount(sc2);
     }
 
     public int getRadius() {

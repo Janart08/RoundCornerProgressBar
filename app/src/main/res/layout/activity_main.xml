@@ -13,14 +13,14 @@
         android:id="@+id/rp"
         android:layout_width="300dp"
         android:layout_height="30dp"
-        app:rcBackgroundColor="#bb000000"
         app:rcMax="30"
         app:rcProgress="10"
         app:rcSecondaryProgress="2"
+        app:rcBackgroundColor="#bb000000"
+        app:rcSecondaryProgressColor="#ffa423"
         app:rcProgressColor="#45cdff"
         app:rcRadius="10dp"
-        app:rcBackgroundPadding="1.5dp"
-        app:rcSecondaryProgressColor="#ffa423"/>
+        app:rcBackgroundPadding="1.5dp"/>
 
 
     <Button
