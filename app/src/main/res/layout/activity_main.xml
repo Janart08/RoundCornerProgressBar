@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.example.dengfa.roundcornerprogress.MainActivity">
+
+    <com.example.dengfa.roundcornerprogress.RoundCornerProgress
+        android:id="@+id/rp"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        app:rcBackgroundColor="#bb000000"
+        app:rcMax="30"
+        app:rcProgress="10"
+        app:rcSecondaryProgress="2"
+        app:rcProgressColor="#45cdff"
+        app:rcRadius="10dp"
+        app:rcBackgroundPadding="1.5dp"
+        app:rcSecondaryProgressColor="#ffa423"/>
+
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"/>
+
+    <Button
+        android:id="@+id/btn_decrement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"/>
+
+    <Button
+        android:id="@+id/btn_add_sec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="second+"/>
+
+    <Button
+        android:id="@+id/btn_decrement_sec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="second-"/>
+</LinearLayout>
