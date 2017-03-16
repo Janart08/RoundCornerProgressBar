@@ -22,7 +22,6 @@
         app:rcRadius="10dp"
         app:rcBackgroundPadding="1.5dp"/>
 
-
     <Button
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"

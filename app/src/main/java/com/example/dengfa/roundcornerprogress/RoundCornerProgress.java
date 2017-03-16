@@ -141,6 +141,25 @@ public class RoundCornerProgress extends View {
         canvas.drawPath(mPath, mPaint);
         mPaint.setXfermode(null);
         canvas.restoreToCount(sc);
+
+        // 绘制secondProgress层
+        int sc2 = canvas.saveLayer(0 + padding, 0 + padding, secondaryProgress / max * mWidth - padding, mHeight - padding,
+                mPaint, Canvas.ALL_SAVE_FLAG);
+        mPaint.setColor(colorSecondaryProgress);
+        mRect.set(0 + padding, 0 + padding, mWidth - padding, mHeight - padding);
+        canvas.drawRoundRect(mRect, radius, radius, mPaint);
+
+        // 设置遮挡属性
+        mPaint.setColor(0xffff0000);
+        mPaint.setXfermode(mMode);
+        // 绘制遮挡
+        mRect.set(0 + padding, 0 + padding, secondaryProgress / max * mWidth - padding, mHeight - padding);
+        float radii2[] = new float[]{radius, radius, radius, radius, radius, radius, radius, radius};
+        mPath.reset();
+        mPath.addRoundRect(mRect, radii2, Path.Direction.CW);
+        canvas.drawPath(mPath, mPaint);
+        mPaint.setXfermode(null);
+        canvas.restoreToCount(sc2);
     }
 
     public int getRadius() {
