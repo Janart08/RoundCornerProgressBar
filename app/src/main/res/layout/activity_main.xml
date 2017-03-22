@@ -13,7 +13,7 @@
         android:id="@+id/rp"
         android:layout_width="300dp"
         android:layout_height="30dp"
-        app:rcMax="30"
+        app:rcMax="100"
         app:rcProgress="10"
         app:rcSecondaryProgress="2"
         app:rcBackgroundColor="#bb000000"
